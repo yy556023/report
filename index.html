@@ -54,6 +54,11 @@
         flex: 1;
         background-color: blue;
       }
+      span:hover,
+      span input:hover {
+        cursor: pointer;
+        font-weight: bolder;
+      }
     </style>
   </head>
   <body>
@@ -76,7 +81,8 @@
           <input type="text" id="expwd" />
         </div>
         <div id="d1-3">
-          <input type="radio" name="exp" id="Upper" value="U" />大寫生成 <input type="radio" name="exp" id="lower" value="l" />小寫生成<br />
+          <span><input type="radio" name="exp" id="Upper" value="U" />大寫生成 </span>
+          <span><input type="radio" name="exp" id="lower" value="l" />小寫生成<br /></span>
         </div>
       </div>
       <div id="d2"></div>
@@ -101,18 +107,18 @@
     };
     //產生帳號
     acc = () => {
-      var temp = a() + a() + a() + "_" + m() + m() + m() + m() + m();
-      if (check() == "U") {
-        console.log("帳號：" + temp);
+      var temp = a() + a() + a() + '_' + m() + m() + m() + m() + m();
+      if (check() == 'U') {
+        console.log('帳號：' + temp);
       } else {
         temp = temp.toLowerCase();
-        console.log("帳號：" + temp.toLowerCase());
+        console.log('帳號：' + temp.toLowerCase());
       }
       return temp;
     };
     //產生密碼
     pwd = () => {
-      var temp = "";
+      var temp = '';
       for (var i = 0; i < 8; i++) {
         var x = Math.floor(Math.random() * 9);
         if (x > 4) {
@@ -121,33 +127,43 @@
           temp += m();
         }
       }
-      console.log("密碼：" + temp.toLowerCase());
+      console.log('密碼：' + temp.toLowerCase());
       return temp.toLowerCase();
     };
-
+    //確認有沒有圈選radio
     check = () => {
-      var x = $("input[name='exp']:checked").prop("value");
+      var x = $("input[name='exp']:checked").prop('value');
       switch (x) {
-        case "U":
-          return "U";
-        case "l":
-          return "l";
+        case 'U':
+          return 'U';
+        case 'l':
+          return 'l';
         default:
           return false;
       }
     };
 
     get = () => {
-      if (check() == "U" || check() == "l") {
-        $("div input").css("opacity", "1.0");
-        $("#exacc").prop("value", acc());
-        $("#expwd").prop("value", pwd());
+      if (check() == 'U' || check() == 'l') {
+        $('div input').css('opacity', '1.0');
+        $('#exacc').prop('value', acc());
+        $('#expwd').prop('value', pwd());
       } else {
-        alert("請至少選擇一項");
+        alert('請至少選擇一項');
       }
     };
-    $("#get").on("click", get);
-    var x = $("input:radio[name='age']:checked").prop("value");
-    console.log(x);
+    $('#get').on('click', get);
+
+    console.log($('input:first-child'));
+
+    $('input:first-child').click(function () {
+      console.log('x');
+    });
+    $('span:nth-child(1)').click(function () {
+      $('input[name="exp"]')[0].checked = true;
+    });
+    $('span:nth-child(2)').click(function () {
+      $('input[name="exp"]')[1].checked = true;
+    });
   </script>
 </html>
