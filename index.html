@@ -7,7 +7,7 @@
     <title>小專la</title>
     <script src="./_js/jquery-3.6.0.js"></script>
     <link rel="stylesheet" href="" />
-    <link rel="shortcut icon" href="./_img/icon/miku01.webp">
+    <link rel="shortcut icon" href="./_img/icon/miku01.webp" />
     <style>
       body {
         position: relative;
@@ -62,7 +62,8 @@
       }
     </style>
   </head>
-  <body>
+  <body onmousedown="return false" onselect="return false">
+    <!--禁用滑鼠選取功能-->
     <div id="test">
       <div id="d1">
         <div id="d1-1">
@@ -91,11 +92,7 @@
     </div>
   </body>
   <script>
-    //ASCII
-    // 0~9:48~57  *9 +48
-    // A~Z:65~90  *25 +65
-    // a~z:97~122 *25 +97
-
+    //---------主功能------------------------------------------------------------
     //產生 A~Z
     var a = () => {
       var x = String.fromCharCode(Math.floor(Math.random() * 25) + 65);
@@ -143,7 +140,7 @@
           return false;
       }
     };
-
+    //獲取體驗帳號密碼
     get = () => {
       if (check() == 'U' || check() == 'l') {
         $('div input').css('opacity', '1.0');
@@ -153,18 +150,50 @@
         alert('請至少選擇一項');
       }
     };
-    $('#get').on('click', get);
-
-    console.log($('input:first-child'));
-
-    $('input:first-child').click(function () {
-      console.log('x');
+    $().ready(function () {
+      $('#get').on('click', get);
     });
+    //---------小功能------------------------------------------------------------
+    //禁止ctrl+a:全選 ctrl+c:複製 ctrl+v:貼上
+    $(document).keydown(function (e) {
+      if (e.keyCode == 65 || e.keyCode == 67 || e.keyCode == 86) {
+        return false;
+      }
+    });
+    //讓span標籤內的所有元素都能被點取 方便操作
     $('span:nth-child(1)').click(function () {
       $('input[name="exp"]')[0].checked = true;
     });
     $('span:nth-child(2)').click(function () {
       $('input[name="exp"]')[1].checked = true;
     });
+    //方向鍵左右選取radio
+    $(document).keydown(addEventListener, function (e) {
+      if (e.keyCode == 37) {
+        $('input[name="exp"]')[0].checked = true;
+      } else if (e.keyCode == 39) {
+        $('input[name="exp"]')[1].checked = true;
+      } else {
+        return false;
+      }
+    });
+    //ctrl+enter 點選獲取體驗帳號按鈕
+    $(document).keyup(addEventListener, function (e) {
+      if (e.ctrlKey && e.keyCode == 13) {
+        get();
+      }
+    });
+    //F5重新整理
+    $(document).keydown(addEventListener, function (e) {
+      if (e.keyCode == 116) {
+        window.location.assign(window.location.href);
+      }
+    });
+    // $(document).keydown(addEventListener, function (e) {
+    //   console.log(e.keyCode);
+    // });
+    // $(document).keydown(addEventListener, function (e) {
+    //   console.log(e.keyCode);
+    // });
   </script>
 </html>
