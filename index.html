@@ -30,14 +30,21 @@
       }
       #d1-1 {
         flex: 1;
+        text-align: center;
       }
       #d1-2 {
         flex: 1;
         text-align: center;
       }
-      #d1-2 p {
+      #d1-2 input {
         opacity: 0;
         transition: opacity 1.5s;
+      }
+      #d1-3 {
+        text-align: center;
+      }
+      #d1-3 input {
+        appearance: auto;
       }
       #d2 {
         flex: 2;
@@ -54,19 +61,22 @@
       <div id="d1">
         <div id="d1-1">
           <h2>請輸入帳號密碼：</h2>
-          <p>
-            <label for="acc">帳號：</label>
-            <input type="text" id="acc" placeholder="請輸入帳號" /><br /><br />
-            <label for="pwd">密碼：</label>
-            <input type="text" id="pwd" placeholder="請輸入密碼" />
-          </p>
+          <label for="acc">帳號：</label>
+          <input type="text" id="acc" placeholder="請輸入帳號" /><br /><br />
+          <label for="pwd">密碼：</label>
+          <input type="text" id="pwd" placeholder="請輸入密碼" /><br /><br />
           <button id="login">登入</button>
         </div>
         <div id="d1-2">
           <h2>還沒有帳號嗎？</h2>
-          <button id="get">獲取體驗帳號</button>
-          <p class="exp">帳號：showMsg</p>
-          <p class="exp">密碼：login5500</p>
+          <p><button id="get">獲取體驗帳號</button></p>
+          <label for="">帳號：</label>
+          <input type="text" id="exacc" /><br /><br />
+          <label for="">密碼：</label>
+          <input type="text" id="expwd" />
+        </div>
+        <div id="d1-3">
+          <input type="radio" name="exp" id="Upper" value="U" />大寫生成 <input type="radio" name="exp" id="lower" value="l" />小寫生成<br />
         </div>
       </div>
       <div id="d2"></div>
@@ -78,21 +88,61 @@
     // 0~9:48~57  *9 +48
     // A~Z:65~90  *25 +65
     // a~z:97~122 *25 +97
-    function r_acc() {
-    switch(Value) {
-      case 'Upper':
-        break;
-      case 'lower':
-        break;
-      default:
-        break;
-    }
-      var m = Math.floor(Math.random()*25);
-    }
-    function r_pwd() {}
 
-    $("#get").on("click", function () {
-      $("div p").css("opacity", "1.0");
-    });
+    //產生 A~Z
+    var a = () => {
+      var x = String.fromCharCode(Math.floor(Math.random() * 25) + 65);
+      return x;
+    };
+    //產生 0~9
+    var m = () => {
+      var x = String.fromCharCode(Math.floor(Math.random() * 9) + 48);
+      return x;
+    };
+    //產生帳號
+    acc = () => {
+      var temp = a() + a() + a() + "_" + m() + m() + m() + m() + m();
+      console.log("帳號：" + temp);
+      return temp;
+    };
+    //產生密碼
+    pwd = () => {
+      var temp = "";
+      for (var i = 0; i < 8; i++) {
+        var x = Math.floor(Math.random() * 9);
+        if (x > 4) {
+          temp += a();
+        } else {
+          temp += m();
+        }
+      }
+      console.log("密碼：" + temp.toLowerCase());
+      return temp.toLowerCase();
+    };
+
+    check = () => {
+      var x = $("input[name='exp']:checked").prop("value");
+      switch (x) {
+        case "U":
+          return true;
+        case "l":
+          return true;
+        default:
+          return false;
+      }
+    };
+
+    get = () => {
+      if (check()) {
+        $("div input").css("opacity", "1.0");
+        $("#exacc").prop("value", acc());
+        $("#expwd").prop("value", pwd());
+      } else {
+        alert("請至少選擇一項");
+      }
+    };
+    $("#get").on("click", get);
+    var x = $("input:radio[name='age']:checked").prop("value");
+    console.log(x);
   </script>
 </html>
