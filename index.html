@@ -102,7 +102,11 @@
     //產生帳號
     acc = () => {
       var temp = a() + a() + a() + "_" + m() + m() + m() + m() + m();
-      console.log("帳號：" + temp);
+      if (check() == "U") {
+        console.log("密碼：" + temp);
+      } else {
+        console.log("密碼：" + temp.toLowerCase());
+      }
       return temp;
     };
     //產生密碼
@@ -124,16 +128,16 @@
       var x = $("input[name='exp']:checked").prop("value");
       switch (x) {
         case "U":
-          return true;
+          return "U";
         case "l":
-          return true;
+          return "l";
         default:
           return false;
       }
     };
 
     get = () => {
-      if (check()) {
+      if (check() == "U" || check() == "l") {
         $("div input").css("opacity", "1.0");
         $("#exacc").prop("value", acc());
         $("#expwd").prop("value", pwd());
