@@ -16,7 +16,6 @@
         background-attachment: fixed;
       }
       #main {
-        /* background-color: gold; */
         position: relative;
         box-shadow: 3px 3px 3px 3px black;
         height: 500px;
@@ -30,7 +29,6 @@
         margin-top: 30px;
         overflow: hidden;
         border-radius: 30px;
-        /* padding: 20px; */
       }
       #main::before {
         content: '';
@@ -39,15 +37,13 @@
         right: 0;
         bottom: 0;
         left: 0;
-        filter: blur(20px);
+        filter: blur(30px);
         background: hsl(0, 0%, 100%, 0.3);
         z-index: -1;
       }
       #bg {
         position: fixed;
         content: '';
-        /* opacity: 0.5; */
-        background-image: url(./_img/slide/01.jpg);
         width: 100%;
         height: 100%;
         top: 0;
@@ -56,6 +52,14 @@
         background-size: cover;
         z-index: -1;
         filter: blur(5px);
+        border-radius: 30px;
+      }
+      #bg img {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        display: none;
       }
       #d1 {
         flex: 1;
@@ -120,7 +124,15 @@
   </head>
   <body>
     <div id="main">
-      <div id="bg"></div>
+      <div id="bg">
+        <img src="./_img/slide/01.jpg" alt="" />
+        <img src="./_img/slide/02.jpg" alt="" />
+        <img src="./_img/slide/03.jpg" alt="" />
+        <img src="./_img/slide/04.jpg" alt="" />
+        <img src="./_img/slide/05.jpg" alt="" />
+        <img src="./_img/slide/06.jpg" alt="" />
+        <img src="./_img/slide/07.jpg" alt="" />
+      </div>
       <div id="d1">
         <div id="d1-1">
           <h2>請輸入帳號密碼：</h2>
@@ -239,7 +251,7 @@
       $('#get').on('click', get);
       $('#login').on('click', login);
     });
-
+    //畫廊 淡入淡出表現
     $('.slide').each(function () {
       let slideImgs = $(this).find('img'),
         slideImgsCount = slideImgs.length,
@@ -247,11 +259,29 @@
 
       slideImgs.eq(currentIndex).fadeIn();
 
-      setInterval(showNextSlide, 5000);
+      setInterval(showNextSlide, 4000);
 
       function showNextSlide() {
         let nextIndex = (currentIndex + 1) % slideImgsCount;
-        console.log(nextIndex);
+        // console.log(nextIndex);
+        slideImgs.eq(currentIndex).fadeOut();
+        slideImgs.eq(nextIndex).fadeIn();
+        currentIndex = nextIndex;
+      }
+    });
+    //背景跟畫廊同步表現
+    $('#bg').each(function () {
+      let slideImgs = $(this).find('img'),
+        slideImgsCount = slideImgs.length,
+        currentIndex = 0;
+
+      slideImgs.eq(currentIndex).fadeIn();
+
+      setInterval(showNextSlide, 4000);
+
+      function showNextSlide() {
+        let nextIndex = (currentIndex + 1) % slideImgsCount;
+        // console.log(nextIndex);
         slideImgs.eq(currentIndex).fadeOut();
         slideImgs.eq(nextIndex).fadeIn();
         currentIndex = nextIndex;
