@@ -11,23 +11,58 @@
     <style>
       body {
         position: relative;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
       }
-      #test {
-        background-color: gold;
+      #main {
+        /* background-color: gold; */
+        position: relative;
+        box-shadow: 3px 3px 3px 3px black;
         height: 500px;
         width: 1920px;
         max-width: 90%;
         max-height: 100%;
         display: flex;
         flex-direction: row;
-        padding: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 30px;
+        overflow: hidden;
+        border-radius: 30px;
+        /* padding: 20px; */
+      }
+      #main::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        filter: blur(20px);
+        background: hsl(0, 0%, 100%, 0.3);
+        z-index: -1;
+      }
+      #bg {
+        position: fixed;
+        content: '';
+        /* opacity: 0.5; */
+        background-image: url(./_img/slide/01.jpg);
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-size: cover;
+        z-index: -1;
+        filter: blur(5px);
       }
       #d1 {
         flex: 1;
         padding: 20px;
-        background-color: red;
         display: flex;
         flex-direction: column;
+        background: hsl(0, 0%, 100%, 0.7);
       }
       #d1-1 {
         flex: 1;
@@ -49,11 +84,12 @@
       }
       #d2 {
         flex: 2;
-        background-color: green;
+        text-align: center;
+        background: hsl(0, 0%, 100%, 0.7);
       }
       #d3 {
         flex: 1;
-        background-color: blue;
+        background: hsl(0, 0%, 100%, 0.7);
       }
       span:hover,
       span input:hover,
@@ -62,10 +98,29 @@
         cursor: pointer;
         font-weight: bolder;
       }
+      .slide {
+        position: relative;
+        margin: 30px;
+        overflow: hidden;
+        height: 400px;
+        width: 900px;
+        border-radius: 30px;
+        box-shadow: 3px 3px 3px 3px black;
+      }
+      .slide img {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        height: 100%;
+        display: none;
+      }
     </style>
   </head>
   <body>
-    <div id="test">
+    <div id="main">
+      <div id="bg"></div>
       <div id="d1">
         <div id="d1-1">
           <h2>請輸入帳號密碼：</h2>
@@ -88,7 +143,17 @@
           <span><input type="radio" name="exp" id="lower" value="l" />小寫生成<br /></span>
         </div>
       </div>
-      <div id="d2"></div>
+      <div id="d2">
+        <div class="slide">
+          <img src="./_img/slide/01.jpg" alt="" />
+          <img src="./_img/slide/02.jpg" alt="" />
+          <img src="./_img/slide/03.jpg" alt="" />
+          <img src="./_img/slide/04.jpg" alt="" />
+          <img src="./_img/slide/05.jpg" alt="" />
+          <img src="./_img/slide/06.jpg" alt="" />
+          <img src="./_img/slide/07.jpg" alt="" />
+        </div>
+      </div>
       <div id="d3"></div>
     </div>
   </body>
@@ -175,6 +240,23 @@
       $('#login').on('click', login);
     });
 
+    $('.slide').each(function () {
+      let slideImgs = $(this).find('img'),
+        slideImgsCount = slideImgs.length,
+        currentIndex = 0;
+
+      slideImgs.eq(currentIndex).fadeIn();
+
+      setInterval(showNextSlide, 5000);
+
+      function showNextSlide() {
+        let nextIndex = (currentIndex + 1) % slideImgsCount;
+        console.log(nextIndex);
+        slideImgs.eq(currentIndex).fadeOut();
+        slideImgs.eq(nextIndex).fadeIn();
+        currentIndex = nextIndex;
+      }
+    });
     //---------小功能------------------------------------------------------------
     //讓span標籤內的所有元素都能被點取 方便操作
     $('span:nth-child(1)').click(function () {
@@ -183,5 +265,10 @@
     $('span:nth-child(2)').click(function () {
       $('input[name="exp"]')[1].checked = true;
     });
+    //彈出小視窗
+    // document.getElementById('qwe').onclick = function () {
+    //   window.open('https://www.google.com.tw/', 'Google', 'width=400,height=300');
+    // console.log('hi');
+    // };
   </script>
 </html>
