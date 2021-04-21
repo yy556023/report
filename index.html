@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./_css/index.css" />
     <link rel="shortcut icon" href="./_img/icon/miku01.webp" />
   </head>
-  <body>
+  <body ONCONTEXTMENU="return false" onSelectStart="return false">
     <div id="main">
       <div id="bg">
         <img src="./_img/slide/01.jpg" alt="" />
@@ -64,6 +64,8 @@
   </body>
   <script>
     //---------主功能------------------------------------------------------------
+    _acc = undefined;
+    _pwd = undefined;
     //產生 A~Z
     var a = () => {
       var x = String.fromCharCode(Math.floor(Math.random() * 25) + 65);
@@ -81,7 +83,7 @@
         console.log('帳號：' + temp);
       } else {
         temp = temp.toLowerCase();
-        console.log('帳號：' + temp.toLowerCase());
+        // console.log('帳號：' + temp.toLowerCase());
       }
       return temp;
     };
@@ -96,7 +98,7 @@
           temp += m();
         }
       }
-      console.log('密碼：' + temp.toLowerCase());
+      // console.log('密碼：' + temp.toLowerCase());
       return temp.toLowerCase();
     };
     //確認有沒有圈選radio
@@ -236,6 +238,26 @@
     $('span:nth-child(2)').click(function () {
       $('input[name="exp"]')[1].checked = true;
     });
+    //使用鍵盤控制畫面
+    $(document).keydown(addEventListener, function (e) {
+      // console.log(e.keyCode);
+      if (e.keyCode == 37) {
+        $(':radio')[0].checked = true;
+      }
+      if (e.keyCode == 39) {
+        $(':radio')[1].checked = true;
+      }
+      if (_acc != undefined && e.keyCode == 13) {
+        login();
+      }
+    });
+    $(document).keyup(addEventListener, function (e) {
+      if (e.ctrlKey && e.keyCode == 13 && _acc == undefined) {
+        get();
+        document.getElementById('get').disabled = true;
+      }
+    });
+
     //彈出小視窗
     // document.getElementById('qwe').onclick = function () {
     //   window.open('https://www.google.com.tw/', 'Google', 'width=400,height=300');
