@@ -8,7 +8,7 @@
     <script src="./_js/jquery-3.6.0.js"></script>
     <link rel="stylesheet" href="./_css/index.css" />
     <link rel="shortcut icon" href="./_img/icon/miku01.webp" />
-  </head>pu
+  </head>
   <body>
     <div id="main">
       <div id="bg">
@@ -201,20 +201,20 @@
         return '0' + par.toString();
       }
     };
-    var h = 0,
-      m = 0,
-      s = 0;
+    var hour = 0,
+      min = 0,
+      sec = 0;
     //時間進位
     time = () => {
-      s = (s + 1) % 60;
-      if (s == 0) {
-        m = (m + 1) % 60;
-        if (m == 0) {
-          h += 1;
+      sec = (sec + 1) % 60;
+      if (sec == 0) {
+        min = (min + 1) % 60;
+        if (min == 0) {
+          hour += 1;
         }
       }
       // console.log(stime(h) + '：' + stime(m) + '：' + stime(s));
-      return stime(h) + '：' + stime(m) + '：' + stime(s);
+      return stime(hour) + '：' + stime(min) + '：' + stime(sec);
     };
     //已瀏覽時間更新
     count = () => {
