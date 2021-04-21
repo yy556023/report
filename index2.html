@@ -12,11 +12,12 @@
     5秒後關閉視窗
   </body>
   <script>
-    var s = 5;
+    var s = 4;
     alert('5秒後自動關閉');
     setTimeout(function () {
       window.close();
-    }, 6000);
+    }, 5000);
+
     setInterval(() => {
       $('body').text(`${s}秒後關閉視窗`);
       s--;

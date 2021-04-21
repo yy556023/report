@@ -132,16 +132,16 @@
       var logacc = $('#acc').prop('value');
       var logpwd = $('#pwd').prop('value');
 
-      // if (_acc == logacc && _pwd == logpwd) {
-        // alert('登入成功！\n體驗帳號已啟用\n5分鐘後自動登出');
+      if (_acc == logacc && _pwd == logpwd) {
+        alert('登入成功！\n體驗帳號已啟用\n5分鐘後自動登出');
         window.open('./index2.html', '_blank', 'width=800,height=450');
-      // } else if (_acc == logacc && _pwd != logpwd) {
-      //   alert('登入失敗！\n密碼輸入錯誤');
-      // } else if (_acc != logacc && _pwd == logpwd) {
-      //   alert('登入失敗！\n帳號輸入錯誤');
-      // } else {
-      //   alert('登入失敗！\n他媽你眼睛脫窗？');
-      // }
+      } else if (_acc == logacc && _pwd != logpwd) {
+        alert('登入失敗！\n密碼輸入錯誤');
+      } else if (_acc != logacc && _pwd == logpwd) {
+        alert('登入失敗！\n帳號輸入錯誤');
+      } else {
+        alert('登入失敗！\n請重新輸入');
+      }
     };
     //文件好後才給予get按鈕功能
     $().ready(function () {
