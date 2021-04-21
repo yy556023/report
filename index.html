@@ -356,7 +356,9 @@
     document.getElementById('d3-1').innerHTML = `<h2>現在時間：</h2>\n
     <h3>${timer.getFullYear()}/${timer.getMonth() + 1}/${timer.getDate()}
     ${timer.getHours()}:${timer.getMinutes()}:${timer.getSeconds()} ${week[timer.getDay()]}</h3>`;
-
+    console.log(document.getElementsByClassName('pic'));
+document.getElementsByClassName('pic').
+    // console.log($(':button'));
     //---------小功能------------------------------------------------------------
     //讓span標籤內的所有元素都能被點取 方便操作
     $('span:nth-child(1)').click(function () {
