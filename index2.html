@@ -8,12 +8,22 @@
     <link rel="shortcut icon" href="./_img/icon/miku01.webp" />
     <title>測試視窗</title>
   </head>
-  <body></body>
+  <body>
+    5秒後關閉視窗
+  </body>
   <script>
-    alert('5秒後關閉視窗');
+    var s = 5;
+    alert('5秒後自動關閉');
+    setTimeout(function () {
+      window.close();
+    }, 6000);
+    setInterval(() => {
+      $('body').text(`${s}秒後關閉視窗`);
+      s--;
+    }, 1000);
 
-    $(document).keydown(function (e) {
-      console.log(e.keyCode);
-    });
+    // $(document).keydown(function (e) {
+    //   console.log(e.keyCode);
+    // });
   </script>
 </html>
