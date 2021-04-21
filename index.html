@@ -107,6 +107,7 @@
       span:hover,
       span input:hover,
       #get,
+      .pic,
       #login {
         cursor: pointer;
         font-weight: bolder;
@@ -173,6 +174,10 @@
           <img src="./_img/slide/05.jpg" alt="" />
           <img src="./_img/slide/06.jpg" alt="" />
           <img src="./_img/slide/07.jpg" alt="" />
+        </div>
+        <div>
+          <button class="pic">上一張</button>
+          <button class="pic">下一張</button>
         </div>
       </div>
       <div id="d3">
@@ -302,7 +307,7 @@
         currentIndex = nextIndex;
       }
     });
-
+    //時間
     var timer = new Date();
     var hour = timer.getHours();
     var min = timer.getMinutes();
@@ -317,6 +322,7 @@
       5: '星期五',
       6: '星期六',
     };
+    //沒有二位數的數字補0回傳字串
     stime = (par) => {
       if (par > 9) {
         return par.toString();
@@ -327,6 +333,7 @@
     var h = 0,
       m = 0,
       s = 0;
+    //時間進位
     time = () => {
       s = (s + 1) % 60;
       if (s == 0) {
@@ -338,14 +345,14 @@
       console.log(stime(h) + '：' + stime(m) + '：' + stime(s));
       return stime(h) + '：' + stime(m) + '：' + stime(s);
     };
-
+    //已瀏覽時間更新
     count = () => {
       document.getElementById('d3-2').innerHTML = `<h2>已瀏覽時間：</h2>\n
     <h3>${time()}</h3>`;
     };
-
+    //每秒更新瀏覽時間
     setInterval(count, 1000);
-
+    //現在時間
     document.getElementById('d3-1').innerHTML = `<h2>現在時間：</h2>\n
     <h3>${timer.getFullYear()}/${timer.getMonth() + 1}/${timer.getDate()}
     ${timer.getHours()}:${timer.getMinutes()}:${timer.getSeconds()} ${week[timer.getDay()]}</h3>`;
