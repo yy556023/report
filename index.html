@@ -54,7 +54,11 @@
         </div>
       </div>
       <div id="d3">
-        <div id="d3-1"></div>
+        <div id="d3-1">
+
+          <h2>現在時間：</h2>
+          <h3>2021/1/1 00:00:00 星期一</h3>
+        </div>
         <div id="d3-2">
           <h2>已瀏覽時間：</h2>
           <h3>00：00：00</h3>
@@ -80,10 +84,9 @@
     acc = () => {
       var temp = a() + a() + a() + '_' + m() + m() + m() + m() + m();
       if (check() == 'U') {
-        console.log('帳號：' + temp);
+        return temp;
       } else {
         temp = temp.toLowerCase();
-        // console.log('帳號：' + temp.toLowerCase());
       }
       return temp;
     };
@@ -98,7 +101,6 @@
           temp += m();
         }
       }
-      // console.log('密碼：' + temp.toLowerCase());
       return temp.toLowerCase();
     };
     //確認有沒有圈選radio
@@ -181,11 +183,7 @@
       }
     });
     //時間
-    var timer = new Date();
-    var hour = timer.getHours();
-    var min = timer.getMinutes();
-    var sec = timer.getSeconds();
-    // console.log(`${hour}：${min}：${sec}`);
+
     var week = {
       0: '星期日',
       1: '星期一',
@@ -215,20 +213,25 @@
           hour += 1;
         }
       }
-      // console.log(stime(h) + '：' + stime(m) + '：' + stime(s));
       return stime(hour) + '：' + stime(min) + '：' + stime(sec);
     };
-    //已瀏覽時間更新
+    //現在時間與瀏覽時間
     count = () => {
+      var timer = new Date();
+      var hour = timer.getHours();
+      var min = timer.getMinutes();
+      var sec = timer.getSeconds();
+
+      document.getElementById('d3-1').innerHTML = `<h2>現在時間：</h2>\n
+        <h3>${timer.getFullYear()}/${timer.getMonth() + 1}/${timer.getDate()}
+        ${timer.getHours()}:${timer.getMinutes()}:${timer.getSeconds()} ${week[timer.getDay()]}</h3>`;
+
       document.getElementById('d3-2').innerHTML = `<h2>已瀏覽時間：</h2>\n
         <h3>${time()}</h3>`;
     };
-    //每秒更新瀏覽時間
+    //每秒更新時間
     setInterval(count, 1000);
-    //現在時間
-    document.getElementById('d3-1').innerHTML = `<h2>現在時間：</h2>\n
-        <h3>${timer.getFullYear()}/${timer.getMonth() + 1}/${timer.getDate()}
-        ${timer.getHours()}:${timer.getMinutes()}:${timer.getSeconds()} ${week[timer.getDay()]}</h3>`;
+
 
     //---------小功能------------------------------------------------------------
     //讓span標籤內的所有元素都能被點取 方便操作
@@ -255,7 +258,6 @@
       }
     });
     $(document).keyup(addEventListener, function (e) {
-      // console.log(e.keyCode);
       if (e.ctrlKey && e.keyCode == 13 && _acc == undefined) {
         get();
         document.getElementById('get').disabled = true;
