@@ -175,10 +175,6 @@
           <img src="./_img/slide/06.jpg" alt="" />
           <img src="./_img/slide/07.jpg" alt="" />
         </div>
-        <div>
-          <button class="pic">上一張</button>
-          <button class="pic">下一張</button>
-        </div>
       </div>
       <div id="d3">
         <div id="d3-1"></div>
@@ -283,7 +279,6 @@
 
       function showNextSlide() {
         let nextIndex = (currentIndex + 1) % slideImgsCount;
-        // console.log(nextIndex);
         slideImgs.eq(currentIndex).fadeOut();
         slideImgs.eq(nextIndex).fadeIn();
         currentIndex = nextIndex;
@@ -301,7 +296,6 @@
 
       function showNextSlide() {
         let nextIndex = (currentIndex + 1) % slideImgsCount;
-        // console.log(nextIndex);
         slideImgs.eq(currentIndex).fadeOut();
         slideImgs.eq(nextIndex).fadeIn();
         currentIndex = nextIndex;
@@ -356,9 +350,7 @@
     document.getElementById('d3-1').innerHTML = `<h2>現在時間：</h2>\n
     <h3>${timer.getFullYear()}/${timer.getMonth() + 1}/${timer.getDate()}
     ${timer.getHours()}:${timer.getMinutes()}:${timer.getSeconds()} ${week[timer.getDay()]}</h3>`;
-    console.log(document.getElementsByClassName('pic'));
-document.getElementsByClassName('pic').
-    // console.log($(':button'));
+
     //---------小功能------------------------------------------------------------
     //讓span標籤內的所有元素都能被點取 方便操作
     $('span:nth-child(1)').click(function () {
