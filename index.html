@@ -94,6 +94,15 @@
       #d3 {
         flex: 1;
         background: hsl(0, 0%, 100%, 0.7);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+      }
+      #d3-1 {
+        flex: 1;
+      }
+      #d3-2 {
+        flex: 1;
       }
       span:hover,
       span input:hover,
@@ -166,7 +175,13 @@
           <img src="./_img/slide/07.jpg" alt="" />
         </div>
       </div>
-      <div id="d3"></div>
+      <div id="d3">
+        <div id="d3-1"></div>
+        <div id="d3-2">
+          <h2>已瀏覽時間：</h2>
+          <h3>00：00：00</h3>
+        </div>
+      </div>
     </div>
   </body>
   <script>
@@ -287,6 +302,54 @@
         currentIndex = nextIndex;
       }
     });
+
+    var timer = new Date();
+    var hour = timer.getHours();
+    var min = timer.getMinutes();
+    var sec = timer.getSeconds();
+    // console.log(`${hour}：${min}：${sec}`);
+    var week = {
+      0: '星期日',
+      1: '星期一',
+      2: '星期二',
+      3: '星期三',
+      4: '星期四',
+      5: '星期五',
+      6: '星期六',
+    };
+    stime = (par) => {
+      if (par > 9) {
+        return par.toString();
+      } else {
+        return '0' + par.toString();
+      }
+    };
+    var h = 0,
+      m = 0,
+      s = 0;
+    time = () => {
+      s = (s + 1) % 60;
+      if (s == 0) {
+        m = (m + 1) % 60;
+        if (m == 0) {
+          h += 1;
+        }
+      }
+      console.log(stime(h) + '：' + stime(m) + '：' + stime(s));
+      return stime(h) + '：' + stime(m) + '：' + stime(s);
+    };
+
+    count = () => {
+      document.getElementById('d3-2').innerHTML = `<h2>已瀏覽時間：</h2>\n
+    <h3>${time()}</h3>`;
+    };
+
+    setInterval(count, 1000);
+
+    document.getElementById('d3-1').innerHTML = `<h2>現在時間：</h2>\n
+    <h3>${timer.getFullYear()}/${timer.getMonth() + 1}/${timer.getDate()}
+    ${timer.getHours()}:${timer.getMinutes()}:${timer.getSeconds()} ${week[timer.getDay()]}</h3>`;
+
     //---------小功能------------------------------------------------------------
     //讓span標籤內的所有元素都能被點取 方便操作
     $('span:nth-child(1)').click(function () {
