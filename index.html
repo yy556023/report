@@ -221,14 +221,14 @@
     //已瀏覽時間更新
     count = () => {
       document.getElementById('d3-2').innerHTML = `<h2>已瀏覽時間：</h2>\n
-    <h3>${time()}</h3>`;
+        <h3>${time()}</h3>`;
     };
     //每秒更新瀏覽時間
     setInterval(count, 1000);
     //現在時間
     document.getElementById('d3-1').innerHTML = `<h2>現在時間：</h2>\n
-    <h3>${timer.getFullYear()}/${timer.getMonth() + 1}/${timer.getDate()}
-    ${timer.getHours()}:${timer.getMinutes()}:${timer.getSeconds()} ${week[timer.getDay()]}</h3>`;
+        <h3>${timer.getFullYear()}/${timer.getMonth() + 1}/${timer.getDate()}
+        ${timer.getHours()}:${timer.getMinutes()}:${timer.getSeconds()} ${week[timer.getDay()]}</h3>`;
 
     //---------小功能------------------------------------------------------------
     //讓span標籤內的所有元素都能被點取 方便操作
@@ -250,16 +250,22 @@
       if (_acc != undefined && e.keyCode == 13) {
         login();
       }
+      if (e.ctrlKey && (e.keyCode == 65 || e.keyCode == 67 || e.keyCode == 86)) {
+        return false;
+      }
     });
     $(document).keyup(addEventListener, function (e) {
+      // console.log(e.keyCode);
       if (e.ctrlKey && e.keyCode == 13 && _acc == undefined) {
         get();
         document.getElementById('get').disabled = true;
       }
     });
-
+    $(document).bind('contextmenu copy selectstart', function () {
+      return false;
+    });
     //彈出小視窗
-    // document.getElementById('qwe').onclick = function () {
+    // document.getElementById('login').onclick = function () {
     //   window.open('https://www.google.com.tw/', 'Google', 'width=400,height=300');
     // console.log('hi');
     // };
