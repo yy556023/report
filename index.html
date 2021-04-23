@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>小專la</title>
     <script src="./_js/jquery-3.6.0.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="./_css/index.css" />
     <link rel="shortcut icon" href="./_img/icon/miku01.webp" />
   </head>
@@ -123,6 +128,7 @@
         $('#exacc').prop('value', `${_acc}`);
         $('#expwd').prop('value', `${_pwd}`);
         document.getElementById('login').disabled = false;
+        document.getElementById('get').disabled = true;
       } else {
         alert('請至少選擇一項');
       }
@@ -258,7 +264,6 @@
     $(document).keyup(addEventListener, function (e) {
       if (e.ctrlKey && e.keyCode == 13 && _acc == undefined) {
         get();
-        document.getElementById('get').disabled = true;
       }
     });
     $(document).bind('contextmenu copy selectstart', function () {
